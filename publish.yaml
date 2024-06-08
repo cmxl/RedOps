@@ -6,6 +6,7 @@ pool:
 
 steps:
     - task: DotNetCoreCLI@2
+      name: "Restoring"
       inputs:
           command: "restore"
           projects: "./RedOps.sln"
@@ -14,24 +15,32 @@ steps:
           noCache: true
 
     - task: DotNetCoreCLI@2
+      name: "Building"
       inputs:
           command: "build"
           projects: "./RedOps.sln"
 
     - task: DotNetCoreCLI@2
+      name: "Testing"
       inputs:
           command: "test"
           projects: "./RedOps.sln"
 
     - task: DotNetCoreCLI@2
+      name: "Publishing"
       inputs:
           command: "publish"
           publishWebProjects: false
           projects: "./RedOps.sln"
 
+    - task: CopyFiles@2
+      inputs:
+        contents: '**/publish'
+        targetFolder: $(Build.ArtifactStagingDirectory)
+
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'drop'
+        ArtifactName: 'redops_artifacts'
         publishLocation: 'Container'
         StoreAsTar: true

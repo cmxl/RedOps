@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution 
 		Directory.Build.props = Directory.Build.props
 		Directory.Packages.props = Directory.Packages.props
 		global.json = global.json
+		nuget.config = nuget.config
+		publish.yaml = publish.yaml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedOps.UnitTests", "tests\RedOps.UnitTests\RedOps.UnitTests.csproj", "{8CAE6E05-DD6A-4056-BBC3-A3F2EA2CE4E7}"

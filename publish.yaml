@@ -1,0 +1,36 @@
+trigger:
+    - main
+
+pool:
+    vmImage: ubuntu-latest
+
+steps:
+    - task: DotNetCoreCLI@2
+      inputs:
+          command: "restore"
+          projects: "./RedOps.sln"
+          feedsToUse: "config"
+          nugetConfigPath: "./nuget.config"
+          noCache: true
+
+    - task: DotNetCoreCLI@2
+      inputs:
+          command: "build"
+          projects: "./RedOps.sln"
+
+    - task: DotNetCoreCLI@2
+      inputs:
+          command: "test"
+          projects: "./RedOps.sln"
+
+    - task: DotNetCoreCLI@2
+      inputs:
+          command: "publish"
+          publishWebProjects: false
+          projects: "./RedOps.sln"
+
+    - task: CopyPublishBuildArtifacts@1
+      inputs:
+          Contents: "bin/**/publish/*.zip"
+          ArtifactName: "redops"
+          ArtifactType: "Container"

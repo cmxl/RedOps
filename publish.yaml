@@ -31,6 +31,6 @@ steps:
 
     - task: CopyPublishBuildArtifacts@1
       inputs:
-          Contents: "bin/**/publish/*.zip"
+          Contents: "**/publish"
           ArtifactName: "redops"
           ArtifactType: "Container"

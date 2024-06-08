@@ -9,7 +9,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+		global.json = global.json
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedOps.UnitTests", "tests\RedOps.UnitTests\RedOps.UnitTests.csproj", "{8CAE6E05-DD6A-4056-BBC3-A3F2EA2CE4E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +29,9 @@ Global
 		{BD172DA4-CDA3-4934-9825-3E2801E743E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD172DA4-CDA3-4934-9825-3E2801E743E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD172DA4-CDA3-4934-9825-3E2801E743E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CAE6E05-DD6A-4056-BBC3-A3F2EA2CE4E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CAE6E05-DD6A-4056-BBC3-A3F2EA2CE4E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CAE6E05-DD6A-4056-BBC3-A3F2EA2CE4E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CAE6E05-DD6A-4056-BBC3-A3F2EA2CE4E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

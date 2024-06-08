@@ -34,11 +34,13 @@ steps:
           projects: "./RedOps.sln"
 
     - task: CopyFiles@2
+      name: "Copying"
       inputs:
         contents: '**/publish'
         targetFolder: $(Build.ArtifactStagingDirectory)
 
     - task: PublishBuildArtifacts@1
+      name: "Artifacts"
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
         ArtifactName: 'redops_artifacts'

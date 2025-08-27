@@ -1,0 +1,6 @@
+@RedOps.WebApi_HostAddress = http://localhost:5238
+
+GET {{RedOps.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

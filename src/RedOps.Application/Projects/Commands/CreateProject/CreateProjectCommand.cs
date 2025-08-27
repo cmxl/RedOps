@@ -1,4 +1,4 @@
-using MediatR;
+using Mediator;
 using RedOps.Application.Common.DTOs;
 using RedOps.Domain.Enums;
 
@@ -10,4 +10,4 @@ public record CreateProjectCommand(
     int? RedmineId,
     string? AzureDevOpsProject,
     SyncDirection SyncDirection
-) : IRequest<ProjectDto>;
+) : ICommand<ProjectDto>;

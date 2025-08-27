@@ -1,0 +1,36 @@
+CREATE TABLE [dbo].[WorkItems] (
+    [Id] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWSEQUENTIALID(),
+    [ProjectId] UNIQUEIDENTIFIER NOT NULL,
+    [Title] NVARCHAR(255) NOT NULL,
+    [Description] NVARCHAR(MAX) NULL,
+    [Status] NVARCHAR(100) NULL,
+    [Priority] NVARCHAR(50) NULL,
+    [Assignee] NVARCHAR(255) NULL,
+    [Reporter] NVARCHAR(255) NULL,
+    [WorkItemType] NVARCHAR(50) NULL,
+    [RedmineId] INT NULL,
+    [AzureDevOpsId] INT NULL,
+    [RedmineIssueNumber] INT NULL,
+    [AzureDevOpsWorkItemId] INT NULL,
+    [ExternalUrl] NVARCHAR(500) NULL,
+    [Tags] NVARCHAR(MAX) NULL, -- JSON array of tags
+    [CustomFields] NVARCHAR(MAX) NULL, -- JSON object for custom fields
+    [DueDate] DATETIME2(7) NULL,
+    [CompletedAt] DATETIME2(7) NULL,
+    [EstimatedHours] DECIMAL(10,2) NULL,
+    [ActualHours] DECIMAL(10,2) NULL,
+    [LastSyncUtc] DATETIME2(7) NULL,
+    [CreatedAt] DATETIME2(7) NOT NULL DEFAULT GETUTCDATE(),
+    [UpdatedAt] DATETIME2(7) NOT NULL DEFAULT GETUTCDATE(),
+    [CreatedBy] NVARCHAR(255) NULL,
+    [UpdatedBy] NVARCHAR(255) NULL,
+    
+    CONSTRAINT [PK_WorkItems] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_WorkItems_ProjectId] FOREIGN KEY ([ProjectId]) REFERENCES [dbo].[Projects] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [UQ_WorkItems_ProjectId_RedmineId] UNIQUE ([ProjectId], [RedmineId]),
+    CONSTRAINT [UQ_WorkItems_ProjectId_AzureDevOpsId] UNIQUE ([ProjectId], [AzureDevOpsId]),
+    CONSTRAINT [CK_WorkItems_EstimatedHours] CHECK ([EstimatedHours] >= 0),
+    CONSTRAINT [CK_WorkItems_ActualHours] CHECK ([ActualHours] >= 0),
+    CONSTRAINT [CK_WorkItems_Tags_JSON] CHECK ([Tags] IS NULL OR ISJSON([Tags]) = 1),
+    CONSTRAINT [CK_WorkItems_CustomFields_JSON] CHECK ([CustomFields] IS NULL OR ISJSON([CustomFields]) = 1)
+);

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>RedOps.Database</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{8b2b1e7f-2e5c-4a6d-8f3e-1a2b3c4d5e6f}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath />
+    <RootNamespace>RedOps.Database</RootNamespace>
+    <AssemblyName>RedOps.Database</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SSDTExists)' == 'True'" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SSDTExists)' == 'False'" Project="$(MSBuildExtensionsPath)\Microsoft\Data\Tools\Schema\SqlTasks\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Tables" />
+    <Folder Include="Views" />
+    <Folder Include="Stored Procedures" />
+    <Folder Include="Functions" />
+    <Folder Include="Indexes" />
+    <Folder Include="Scripts" />
+    <Folder Include="Scripts\PostDeployment" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\Projects.sql" />
+    <Build Include="Tables\WorkItems.sql" />
+    <Build Include="Tables\Comments.sql" />
+    <Build Include="Tables\Attachments.sql" />
+    <Build Include="Tables\SyncOperations.sql" />
+    <Build Include="Tables\SyncConflicts.sql" />
+    <Build Include="Tables\FieldMappings.sql" />
+    <Build Include="Tables\OutboxEvents.sql" />
+    <Build Include="Views\vw_ActiveProjects.sql" />
+    <Build Include="Views\vw_RecentSyncOperations.sql" />
+    <Build Include="Views\vw_PendingConflicts.sql" />
+    <Build Include="Stored Procedures\sp_GetProjectSyncStatus.sql" />
+    <Build Include="Stored Procedures\sp_CleanupOldSyncOperations.sql" />
+    <Build Include="Functions\fn_GetSyncDirectionText.sql" />
+    <Build Include="Indexes\IX_Projects_RedmineId.sql" />
+    <Build Include="Indexes\IX_Projects_AzureDevOpsProject.sql" />
+    <Build Include="Indexes\IX_WorkItems_ProjectId.sql" />
+    <Build Include="Indexes\IX_WorkItems_RedmineId.sql" />
+    <Build Include="Indexes\IX_WorkItems_AzureDevOpsId.sql" />
+    <Build Include="Indexes\IX_SyncOperations_ProjectId_StartTime.sql" />
+    <Build Include="Indexes\IX_OutboxEvents_ProcessedAt.sql" />
+    <Build Include="Indexes\IX_OutboxEvents_CreatedAt.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Scripts\PostDeployment\Script.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\PostDeployment\SeedData.sql" />
+    <None Include="RedOps.Database.publish.xml" />
+  </ItemGroup>
+</Project>
